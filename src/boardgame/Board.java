@@ -47,30 +47,24 @@ public class Board {
 	}
 	
 	public void placePiece(Piece piece, Position position) {
-		if (thereIsAPeace(position)) {
+		if (thereIsAPiece(position)) {
 			throw new BoardException("BoardError: tried to place a piece on a occupied position");
 		}
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
 	}
 	
+	private boolean positionExists(int row, int column) {
+		return row >= 0 && row < rows && column >= 0 && column < columns;
+	}
+
 	public boolean positionExists(Position position) {
-		return  position.getRow() > 0 
-		     && position.getRow() < this.rows
-		     && position.getColumn() >= 0 
-		     && position.getColumn() < this.columns;
+		return positionExists(position.getRow(), position.getColumn());
 	}
-	
-	public boolean positionExists(int row, int col) {
-		return  row >= 0 
-		     && row < this.rows
-		     && col >= 0 
-		     && col < this.columns;
-	}
-	
-	public boolean thereIsAPeace(Position position) {
+
+	public boolean thereIsAPiece(Position position) {
 		if (!positionExists(position)) {
-			throw new BoardException("BoardError: Position does not exists");
+			throw new BoardException("Position not on the board");
 		}
 		return piece(position) != null;
 	}

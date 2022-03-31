@@ -22,7 +22,7 @@ public class Position {
 		this.row = line;
 	}
 
-	public int getColumn() {
+	public Integer getColumn() {
 		return column;
 	}
 
