@@ -1,16 +1,15 @@
 package boardgame;
 
-
 public class Board {
 	private int rows;
 	private int columns;
 	private Piece[][] pieces;
 
 	public Board(int rows, int columns) {
-		if (rows <= 0 || columns <=0) {
+		if (rows <= 0 || columns <= 0) {
 			throw new BoardException("BoardError: The board rows and collumns must be a positive integer");
 		}
-		
+
 		this.rows = rows;
 		this.columns = columns;
 		pieces = new Piece[rows][columns];
@@ -45,28 +44,30 @@ public class Board {
 		}
 		return pieces[position.getRow()][position.getColumn()];
 	}
-	
+
 	public void placePiece(Piece piece, Position position) {
-		if (thereIsAPiece(position)) {
+		if (thereIsAPeace(position)) {
 			throw new BoardException("BoardError: tried to place a piece on a occupied position");
 		}
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
 	}
-	
-	private boolean positionExists(int row, int column) {
-		return row >= 0 && row < rows && column >= 0 && column < columns;
-	}
 
 	public boolean positionExists(Position position) {
-		return positionExists(position.getRow(), position.getColumn());
+		return position.getRow() >= 0 && position.getRow() < this.rows && position.getColumn() >= 0
+				&& position.getColumn() < this.columns;
 	}
 
-	public boolean thereIsAPiece(Position position) {
+	public boolean positionExists(int row, int col) {
+		return row >= 0 && row < this.rows && col >= 0 && col < this.columns;
+	}
+
+	public boolean thereIsAPeace(Position position) {
+
 		if (!positionExists(position)) {
-			throw new BoardException("Position not on the board");
+			throw new BoardException("BoardError: Position does not exists");
 		}
 		return piece(position) != null;
 	}
-	
+
 }

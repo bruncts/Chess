@@ -12,7 +12,6 @@ public class ChessPosition {
 		}
 		this.row = row;
 		this.column = column;
-		System.out.println("chessposition : " + this.row + this.column);
 	}
 
 	public int getRow() {
