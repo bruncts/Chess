@@ -1,6 +1,10 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
@@ -25,6 +29,18 @@ public class UI {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+
+	public static ChessPosition readChessPosition(Scanner sc ) {
+		try {
+			String s =  sc.nextLine();
+			int row = Integer.parseInt(String.valueOf(s.charAt(1)));
+			char col = s.charAt(0);
+			return new ChessPosition(col,row);
+		} catch (RuntimeException e) {
+			throw new InputMismatchException("Invalid chess positon");
+		}
+
+	}
 
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
 	public static void clearScreen() {

@@ -33,33 +33,45 @@ public class Board {
 
 	public Piece piece(int row, int column) {
 		if (!positionExists(row, column)) {
-			throw new BoardException("BoardError: Position does not exists");
+			throw new BoardException("Position does not exists on the board");
 		}
 		return pieces[row][column];
 	}
 
 	public Piece piece(Position position) {
 		if (!positionExists(position)) {
-			throw new BoardException("BoardError: Position does not exists");
+			throw new BoardException("Position does not exists");
 		}
 		return pieces[position.getRow()][position.getColumn()];
 	}
 
 	public void placePiece(Piece piece, Position position) {
 		if (thereIsAPeace(position)) {
-			throw new BoardException("BoardError: tried to place a piece on a occupied position");
+			throw new BoardException("tried to place a piece on a occupied position");
 		}
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
 	}
 
+	public Piece removePiece(Position position) {
+		if (!positionExists(position)) {
+			throw new BoardException("Position does not exists");
+		}
+		if (piece(position) == null) {
+			return null;
+		}
+		Piece removed_piece = piece(position);
+		removed_piece.position = null;
+		pieces[position.getRow()][position.getColumn()] = null;
+		return removed_piece;
+	}
+
 	public boolean positionExists(Position position) {
-		return position.getRow() >= 0 && position.getRow() < this.rows && position.getColumn() >= 0
-				&& position.getColumn() < this.columns;
+		return positionExists(position.getRow(), position.getColumn());
 	}
 
 	public boolean positionExists(int row, int col) {
-		return row >= 0 && row < this.rows && col >= 0 && col < this.columns;
+		return row >= 0 && row < rows && col >= 0 && col < columns;
 	}
 
 	public boolean thereIsAPeace(Position position) {

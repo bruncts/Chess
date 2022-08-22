@@ -6,9 +6,9 @@ public class ChessPosition {
 	private int row;
 	private char column;
 
-	public ChessPosition(int row, char column) {
+	public ChessPosition(char column, int row) {
 		if ((column < 'a' || column > 'h') || (row < 1 || row > 8)) {
-			throw new ChessException("Error: It must be a valid chess positon.");
+			throw new ChessException("It must be a valid chess positon.");
 		}
 		this.row = row;
 		this.column = column;
@@ -27,9 +27,7 @@ public class ChessPosition {
 	}
 
 	protected static ChessPosition fromPosition(Position position) {
-		int roww = position.getRow();
-		char coll = (char) ('a' - position.getColumn());
-		return new ChessPosition(roww, coll);
+		return new ChessPosition((char)('a' - position.getColumn()), 8 - position.getRow());
 	}
 
 	@Override
