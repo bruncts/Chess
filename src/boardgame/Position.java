@@ -33,4 +33,10 @@ public class Position {
 	public void move(int row, int line) {
 
 	}
+	
+	public void setValues(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
+	
 }
