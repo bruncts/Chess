@@ -46,7 +46,7 @@ public class Board {
 	}
 
 	public void placePiece(Piece piece, Position position) {
-		if (thereIsAPeace(position)) {
+		if (thereIsAPiece(position)) {
 			throw new BoardException("tried to place a piece on a occupied position");
 		}
 		pieces[position.getRow()][position.getColumn()] = piece;
@@ -74,7 +74,7 @@ public class Board {
 		return row >= 0 && row < rows && col >= 0 && col < columns;
 	}
 
-	public boolean thereIsAPeace(Position position) {
+	public boolean thereIsAPiece(Position position) {
 
 		if (!positionExists(position)) {
 			throw new BoardException("BoardError: Position does not exists");
